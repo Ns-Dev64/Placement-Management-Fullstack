@@ -1,0 +1,10 @@
+const express=require("express")
+const router=express.Router()
+const validate_token=require("../middleware/tokenhandler")
+const { createAdmin, signAdmin, logged_in, handle_application, view_applications } = require("../controllers/adminController")
+router.post("/createAdmin",createAdmin)
+router.post("/signAdmin",signAdmin)
+router.post("/logAdmin",validate_token,logged_in)
+router.post("/applications",validate_token,handle_application)
+router.post("/viewapps",validate_token,view_applications)
+module.exports=router

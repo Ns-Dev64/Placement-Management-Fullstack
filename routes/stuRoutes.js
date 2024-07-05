@@ -1,10 +1,12 @@
 const express=require("express")
 const router=express.Router()
 const {registerStu,logged_in,signStu, updateStu, deleteStu}=require("../controllers/stuController")
+const apply_placement=require("../controllers/placementController")
 const validate_token=require("../middleware/tokenhandler")
 router.post("/registerStu",registerStu)
 router.post("/signStu",signStu)
 router.post("/loginStu",validate_token,logged_in)
 router.post("/updateStu",validate_token,updateStu)
 router.post("/delStu",validate_token,deleteStu)
+router.post("/apply",validate_token,apply_placement)
 module.exports=router

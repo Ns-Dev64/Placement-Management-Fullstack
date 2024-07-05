@@ -19,9 +19,7 @@ const apply_schema=mongoose.Schema({
     Linkedin_url:{
         type:"String"
     },
-    Approved_interview:{
-        type:"String"
-    }
+    
 })
 
 module.exports=mongoose.model("Apply",apply_schema)

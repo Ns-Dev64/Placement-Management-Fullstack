@@ -43,6 +43,7 @@ const signStu = async_handler(async (req, res, next) => {
         );
         req.headers["authorization"] = `Bearer ${access_token}`;
         req.url = "/loginStu";
+        req.access_token=access_token
         next();
       } else {
         res.status(400);
@@ -53,7 +54,13 @@ const signStu = async_handler(async (req, res, next) => {
 
 
 const logged_in = async_handler(async (req, res) => {
-    res.status(200).json(req.user);
+    user=req.user
+    access_token=req.access_token
+    const response={
+        "user":user,
+        "access_token":access_token
+    }
+    res.status(200).json(response);
   });
 
 
