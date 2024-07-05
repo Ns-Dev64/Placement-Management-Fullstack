@@ -11,7 +11,8 @@ const admin_schema=mongoose.Schema({
     },
     Email:{
         type:"String",
-        required:true
+        required:true,
+        unique:true
     },
     otp: { type: "String" },
     otpExpires: { type: "Date" }
