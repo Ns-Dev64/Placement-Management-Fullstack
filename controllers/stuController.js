@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const Student = require("../models/stuModel");
 
 const registerStu = async_handler(async (req, res) => {
-  const { Name, Email, Password, USN } = req.body;
+  const { Name, Email, Password, USN,Batch } = req.body;
   const stu_avail = await Student.findOne({ Email });
   if (stu_avail) {
     res.status(401);
@@ -15,6 +15,7 @@ const registerStu = async_handler(async (req, res) => {
     Name: Name,
     Email: Email,
     Password: hashed_pass,
+    Batch:Batch,
     USN: USN,
   });
   await new_student.save();
@@ -36,6 +37,8 @@ const signStu = async_handler(async (req, res, next) => {
               Email: user.Email,
               Name: user.Name,
               id: user._id,
+              USN:user.USN,
+              Batch:user.Batch
             },
           },
           process.env.ACCESS_TOKEN,

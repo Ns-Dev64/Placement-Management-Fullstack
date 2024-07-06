@@ -13,6 +13,10 @@ const stu_schema=mongoose.Schema({
         type:"String",
         required:true
     },
+    Batch:{
+        type:"String",
+        required:true
+    },
     USN:{
         type:"String",
         required:true

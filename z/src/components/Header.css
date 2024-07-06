@@ -1,0 +1,24 @@
+/* HeaderComponent.css */
+
+.header {
+    background-color: #295f99; /* Primary color for header */
+    padding: 15px 0; /* Adjust padding as needed */
+    color: #fff; /* Text color */
+    text-align: center; /* Center-align text */
+}
+
+.header-content {
+    max-width: 600px; /* Limit width of content */
+    margin: 0 auto; /* Center-align content */
+}
+
+.header-title {
+    font-size: 2rem; /* Larger font size for title */
+    font-weight: bold; /* Bold text */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.header-buttons .btn {
+    font-size: 1rem; /* Font size of button */
+    padding: 10px 20px; /* Padding around button */
+}
