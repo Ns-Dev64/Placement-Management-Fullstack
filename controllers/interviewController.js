@@ -2,7 +2,7 @@ const async_handler = require("express-async-handler");
 const Interview = require("../models/interviewModel");
 const Student = require("../models/stuModel");
 const Company = require("../models/companyModel");
-
+const nodemailer=require("nodemailer")
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {

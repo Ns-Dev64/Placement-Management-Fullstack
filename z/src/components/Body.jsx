@@ -1,7 +1,35 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Body.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 export default function Body() {
+    const [stuEmail, setStuEmail] = useState('');
+    const [stuPassword, setStuPassword] = useState('');
+    const [AdminEmail, setAdminEmail] = useState('');
+    const [AdminPassword, setAdminPassword] = useState('');
+    const navigate=useNavigate()
+    const handleStudent=async()=>{
+        
+        await axios.post('http://localhost:5001/api/students/signStu',{
+            "Email":stuEmail,
+            "Password":stuPassword
+        }).then(response=>{
+            const {Email,Name,id,USN,Batch}=response.data.user
+            const {access_token}=response.data
+            localStorage.setItem('accessToken',access_token)
+            const studcred={
+                "Email":Email,
+                "Name":Name,
+                "id":id,
+                "USN":USN,
+                "Batch":Batch
+            }
+            navigate('/StudentDash',{state:{studcred}})
+        }).catch(error=>{
+            console.error(error)
+        })
+    }
   return (
     <>
 
@@ -21,24 +49,30 @@ export default function Body() {
                                 <input
                                     type="text"
                                     id="defaultForm-email"
+                                    placeholder='Your Email'
+                                    value={stuEmail}
+                                    onChange={(e) => setStuEmail(e.target.value)}
                                     className="form-control"
                                 />
-                                <label htmlFor="defaultForm-email1">Your email</label>
+                                
                             </div>
                             <div className="md-form">
                                 <i className="fa fa-lock prefix white-text"></i>
                                 <input
                                     type="password"
                                     id="defaultForm-pass1"
+                                    value={stuPassword}
+                                    onChange={(e) => setStuPassword(e.target.value)}
+                                    placeholder='Your Password'
                                     className="form-control"
                                 />
-                                <label htmlFor="defaultForm-pass1">Your password</label>
+                                
                             </div>
-                            <Link className='navbar-brand' to="/" style={{color:"bisque"}}>
+                            <Link className='navbar-brand' to="/register" style={{color:"bisque"}} >
                              New? Register now
                             </Link>
                             <div className="text-center">
-                                <button className="btn btn-outline-white waves-effect waves-light">
+                                <button className="btn btn-outline-white waves-effect waves-light" onClick={handleStudent}>
                                     Next
                                 </button>
                             </div>
@@ -58,20 +92,26 @@ export default function Body() {
                                 <input
                                     type="text"
                                     id="defaultForm-email"
+                                   placeholder=' Email'
+                                   value={AdminEmail}
+                                   onChange={(e) => setAdminEmail(e.target.value)}
                                     className="form-control"
                                 />
-                                <label htmlFor="defaultForm-email">Your email</label>
+                                
                             </div>
                             <div className="md-form">
                                 <i className="fa fa-lock prefix grey-text"></i>
                                 <input
                                     type="password"
                                     id="defaultForm-pass"
+                                    value={AdminPassword}
+                                    onChange={(e) => setAdminPassword(e.target.value)}
+                                    placeholder=' Password'
                                     className="form-control"
                                 />
-                                <label htmlFor="defaultForm-pass">Your password</label>
+                                
                             </div>
-                            <Link className='navbar-brand' to="/" style={{color:"red"}}>
+                            <Link className='navbar-brand' to="/AdminNotice" style={{color:"red"}}>
                              Cant register Admin (refer here)
                             </Link>   
                             <div className="text-center">

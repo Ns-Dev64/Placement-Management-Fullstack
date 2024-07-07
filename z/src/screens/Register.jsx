@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { useNavigate } from 'react-router-dom';
 import "./Register.css";
 import { Link } from "react-router-dom";
-
+import axios from 'axios'
 export default function Register() {
     const navigate = useNavigate();
     const [cred,setcred]=useState({Name:'',Email:'',Password:'',Batch:'',USN:''})
@@ -14,9 +14,15 @@ export default function Register() {
         
        }
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault(); 
-        navigate('/Otp',{state:{cred}});
+        const Email={
+          "Email":cred.Email
+        }
+        console.log(Email)
+        const response=await axios.post('http://localhost:5001/request_otp',Email)
+        const otpId=response.data.otpId
+        navigate('/Otp',{state:{cred,otpId}});
     };
   return (
     <>
@@ -88,6 +94,7 @@ export default function Register() {
                                 className="form-control input-lg"
                                 placeholder="Full Name"
                                 value={cred.Name}
+                                
                                 onChange={update_val}
                                 maxLength="100"
                                 type="text"

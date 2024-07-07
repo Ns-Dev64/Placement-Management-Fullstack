@@ -1,5 +1,16 @@
 const mongoose=require("mongoose")
 
+const Comp_Domains=mongoose.Schema({
+    Domains:{
+        type:"String",
+        required:true
+    }
+})
+const Company_Jobs=mongoose.Schema({
+    Job_Titles:{
+        type:"String"
+    }
+})
 const company_schema=mongoose.Schema({
     Name:{
         type:"String",
@@ -26,17 +37,8 @@ const company_schema=mongoose.Schema({
     }
 })
 
-const Comp_Domains=mongoose.Schema({
-    Domains:{
-        type:"String",
-        required:true
-    }
-})
 
-const Company_Jobs=mongoose.Schema({
-    Job_Titles:{
-        type:"String"
-    }
-})
+
+
 
 module.exports=mongoose.model("Company",company_schema)

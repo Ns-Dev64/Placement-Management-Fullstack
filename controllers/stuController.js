@@ -2,7 +2,7 @@ const async_handler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Student = require("../models/stuModel");
-
+const Apply=require("../models/applyModel")
 const registerStu = async_handler(async (req, res) => {
   const { Name, Email, Password, USN,Batch } = req.body;
   const stu_avail = await Student.findOne({ Email });
@@ -19,7 +19,7 @@ const registerStu = async_handler(async (req, res) => {
     USN: USN,
   });
   await new_student.save();
-  return res.status(200).send("student saved sucessfully");
+  return res.status(200).json({message:"student saved sucessfully"});
 });
 
 
@@ -68,17 +68,23 @@ const logged_in = async_handler(async (req, res) => {
 
 
 const updateStu = async_handler(async (req, res) => {
-    const {Email,Password}=req.body
-    if(Email,Password){
-      res.status(400).send("Cannot update Email or Password")
-    }
+  const {Email,Batch,Password,Name}=req.body
+  const updateData={}
+  if (Email) updateData.Email = Email;
+  if (Batch) updateData.Batch = Batch;
+  if (Name) updateData.Name = Name;
+  if(Password){
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(Password, salt);
+    updateStu.password = hashedPassword;
+  }
     try {
       const stu_update = await Student.findByIdAndUpdate(
         req.user.id,
-        req.body,
+        updateData,
         { new: true }
       );
-      res.status(200).json({ message: "success" });
+      res.status(200).json({ message: "success",updatedData:stu_update });
     } catch (err) {
       res.status(401);
       throw new Error("Error occured whilst upating data");
@@ -88,9 +94,13 @@ const updateStu = async_handler(async (req, res) => {
 
 const deleteStu = async_handler(async (req, res) => {
     const stu_delete = await Student.findById(req.user.id);
+    const apply_delete=await Apply.findOne({'student_id':req.user.id})
     if (!stu_delete) {
       res.status(400);
       throw new Error("Error occured whilst processing your request");
+    }
+    if(apply_delete){
+      await apply_delete.deleteOne();
     }
     await stu_delete.deleteOne();
     res.status(200).json({ message: "success" });

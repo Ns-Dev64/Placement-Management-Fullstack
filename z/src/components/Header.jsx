@@ -9,7 +9,7 @@ export default function Header() {
                 <div className="header-content">
                     <h2 className="header-title">Placement and Traning Cell</h2>
                     <div className="header-buttons">
-                        <Button variant="primary">Learn More</Button>
+                        <Button variant="primary" href='https://pdit.ac.in/index.php/t-p-cell'>Learn More</Button>
                     </div>
                 </div>
             </Container>
