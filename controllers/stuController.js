@@ -66,6 +66,15 @@ const logged_in = async_handler(async (req, res) => {
     res.status(200).json(response);
   });
 
+const getStu=async_handler(async(req,res)=>{
+  const stu_avail=await Student.findById(req.user.id)
+  if(stu_avail){
+    res.status(200).json({message:stu_avail})
+  }
+  else{
+    res.status(400).json({message:"error student not found"})
+  }
+})
 
 const updateStu = async_handler(async (req, res) => {
   const {Email,Batch,Password,Name}=req.body
@@ -106,11 +115,16 @@ const deleteStu = async_handler(async (req, res) => {
     res.status(200).json({ message: "success" });
   });
 
+const stud_application=async_handler(async(req,res)=>{
+  
+})
+
   module.exports = {
     registerStu,
     logged_in,
     signStu,
     updateStu,
     deleteStu,
+    getStu
   };
   

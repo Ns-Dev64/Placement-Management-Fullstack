@@ -13,9 +13,7 @@ const admin_schema=mongoose.Schema({
         type:"String",
         required:true,
         unique:true
-    },
-    otp: { type: "String" },
-    otpExpires: { type: "Date" }
+    }
 })
 
-module.exports=mongoose.model("Admin",admin_schema)
+module.exports=mongoose.model("AdminModel",admin_schema)

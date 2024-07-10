@@ -9,7 +9,7 @@ const validate_token=async_handler(async(req,res,next)=>{
         jwt.verify(token,process.env.ACCESS_TOKEN,(err,decoded)=>{
             if(err){
                 res.status(401)
-                throw new Error("Student isn't authorized")
+                throw new Error("User isn't authorized")
             }
             req.user=decoded.user
             next();

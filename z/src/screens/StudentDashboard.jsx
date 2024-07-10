@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StudentNavbar from "../components/StudentNavbar";
 import Footer from "../components/Footer";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -8,6 +9,8 @@ export default function StudentDashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const studcred = location.state?.studcred;
+  const token=localStorage.getItem('accessToken')
+  const [applicationStatus, setApplicationStatus] = useState('pending');
   const handleEditProfile = () => {
     navigate("/EditProfile", { state: { studcred } });
   };
@@ -29,6 +32,28 @@ export default function StudentDashboard() {
         console.error(error)
       })
   }
+  const handlePlacement=()=>{
+    navigate('/Apply')
+  }
+  useEffect(()=>{
+    const affirm=async()=>{
+      await axios.post('http://localhost:5001/api/students/affirm',{},{
+        headers:{
+          'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+      }).then(response=>{
+        const {message}=response.data
+        if(message==='success'){
+          setApplicationStatus('underReview');
+          
+        }
+      }).catch(err=>{
+        console.error(err)
+      })
+    }
+    affirm()
+  })
   return (
     <>
       <StudentNavbar></StudentNavbar>
@@ -37,6 +62,7 @@ export default function StudentDashboard() {
           <h3>{studcred.Name}'s Profile</h3>
           <div style={styles.infoContainer}>
             <p>
+              
               <strong>Name:</strong> {studcred.Name}
             </p>
             <p>
@@ -49,7 +75,17 @@ export default function StudentDashboard() {
               <strong>USN:</strong> {studcred.USN}
             </p>
           </div>
-          <button style={styles.button}>Apply for Placement</button>
+          <div>
+      {applicationStatus === 'pending' ? (
+        <button style={styles.button} onClick={handlePlacement}>Apply for Placement</button>
+      ) : (
+        
+        <button className="btn btn-success" type="button" disabled>
+  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  <span style={{fontFamily:'sans-serif',marginLeft:'10px'}}>Under Review</span>
+</button>
+      )}
+    </div>
         </div>
         <br />
         <div style={styles.buttonContainer}>
@@ -101,7 +137,7 @@ export default function StudentDashboard() {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className=" btn-danger btn-close"
+                  className=" btn-danger"
                   style={styles.outsideButton}
                   onClick={handleDeleteProfile}
                 >

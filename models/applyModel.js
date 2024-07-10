@@ -9,6 +9,10 @@ const apply_schema=mongoose.Schema({
         type:"String",
         required:true
     },
+    SGPA:{
+        type:"String",
+        required:true
+    },
     Photo:{
         type:"String",
         required:true

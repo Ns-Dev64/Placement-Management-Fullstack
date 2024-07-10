@@ -88,7 +88,7 @@ const OtpVerificationComponent = () => {
                 </h3>
                 <form onSubmit={handleSubmit}>
                   <div className="form-group">
-                    <label htmlFor="otpInput">OTP</label>
+                    <label htmlFor="otpInput">OTP <strong style={{color:'red'}}>*</strong></label>
                     <input
                       type="text"
                       className="form-control"

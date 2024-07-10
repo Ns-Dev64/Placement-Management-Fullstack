@@ -1,16 +1,41 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import './Body.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+
 export default function Body() {
     const [stuEmail, setStuEmail] = useState('');
     const [stuPassword, setStuPassword] = useState('');
-    const [AdminEmail, setAdminEmail] = useState('');
+    const [AdminUsername, setAdminUsername] = useState('');
     const [AdminPassword, setAdminPassword] = useState('');
     const navigate=useNavigate()
+    useEffect(()=>{
+        const token=localStorage.getItem('accessToken')
+        if(token){
+            const logStudentin=async()=>{
+                await axios.post('http://localhost:5001/api/students/getStu',{},{
+                    headers:{
+                        'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+                    }
+                }).then(response=>{
+                    const {message}=response.data
+                    const studcred={
+                        Name:message.Name,
+                        Email:message.Email,
+                        Batch:message.Batch,
+                        USN:message.USN
+                    }
+                    navigate('/StudentDash',{state:{studcred}})
+                }).catch(err=>{
+                    console.error(err)
+                })
+            }
+            logStudentin()
+        }
+    },[])
     const handleStudent=async()=>{
-        
         await axios.post('http://localhost:5001/api/students/signStu',{
             "Email":stuEmail,
             "Password":stuPassword
@@ -28,6 +53,17 @@ export default function Body() {
             navigate('/StudentDash',{state:{studcred}})
         }).catch(error=>{
             console.error(error)
+        })
+    }
+    const handleAdmin=async()=>{
+        await axios.post('http://localhost:5001/api/Admin/signAdmin',{
+            "Username":AdminUsername,
+            "Password":AdminPassword
+        }).then(response=>{
+            const {Username,Email,id}=response.data
+            console.log(Username,Email,id)
+        }).catch(err=>{
+            console.error(err)
         })
     }
   return (
@@ -92,9 +128,9 @@ export default function Body() {
                                 <input
                                     type="text"
                                     id="defaultForm-email"
-                                   placeholder=' Email'
-                                   value={AdminEmail}
-                                   onChange={(e) => setAdminEmail(e.target.value)}
+                                   placeholder='Username'
+                                   value={AdminUsername}
+                                   onChange={(e) => setAdminUsername(e.target.value)}
                                     className="form-control"
                                 />
                                 
@@ -115,7 +151,7 @@ export default function Body() {
                              Cant register Admin (refer here)
                             </Link>   
                             <div className="text-center">
-                                <button className="btn btn-default waves-effect waves-light">
+                                <button className="btn btn-default waves-effect waves-light" onClick={handleAdmin}>
                                     Next
                                     
                                 </button>
