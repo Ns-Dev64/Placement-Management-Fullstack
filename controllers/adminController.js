@@ -35,6 +35,15 @@ const signAdmin = async_handler(async (req, res, next) => {
   }
 });
 
+const verif_admin=async_handler(async(req,res)=>{
+  const verifyadmin=await AdminModel.findById(req.user.id)
+  if(verifyadmin){
+    res.status(200).json({message:"success"})
+  }
+  else{
+    res.status(400).json({message:"revoked"})
+  }
+})
 
 const createAdmin=async_handler(async(req,res)=>{
   const {Email,Username,Password}=req.body
@@ -61,28 +70,22 @@ const createAdmin=async_handler(async(req,res)=>{
 })
 
 const handle_application = async_handler(async (req, res) => {
-  const { student_id, approvalStatus } = req.body;
-  if (!student_id || !approvalStatus) {
-    res
-      .status(400)
-      .json({ message: "Error while approving/rejecting the application" });
+  const {app_id,approvalStatus}=req.body
+  const get_application=await Apply.findById(app_id)
+  if(!get_application){
+    res.status(400).json({message:"error proccessing the application"})
   }
-  const find_stu = await Student.findById(student_id);
-  if (!find_stu) {
-    res.status(400).json({ message: "Error Student not found" });
-  }
-  Student.findByIdAndUpdate(
-    student_id,
-    { Approved: approvalStatus },
-    { new: true },
-    (err, updatedStudent) => {
-      if (err) {
-        res.status(400).json({ message: err });
-      } else {
-        res.status(200).json(updatedStudent);
-      }
+  else{
+    const studentId=get_application.student_id
+    const get_student_approve=await Student.findByIdAndUpdate(studentId,
+      {Approved:approvalStatus},
+      {new:true}
+    )
+    if(!get_student_approve){
+      res.status(400).json({message:"Error occured while proccessing"})
     }
-  );
+    res.status(200).json(get_student_approve)
+  }
 });
 
 const view_applications = async_handler(async (req, res) => {
@@ -95,8 +98,37 @@ const view_applications = async_handler(async (req, res) => {
   res.status(200).json(applications);
 });
 
+const show_student=async_handler(async(req,res)=>{
+  const {app_id}=req.body
+  const get_application=await Apply.findById(app_id)
+  if(!get_application){
+    res.status(400).json({message:"error proccessing the application"})
+  }
+  else{
+    const studentId=get_application.student_id
+    const get_student=await Student.findById(studentId)
+    res.status(200).json(get_student)
+  }
+})
+
+const verifyStudent=async_handler(async(req,res)=>{
+  const {app_id}=req.body
+  const get_application=await Apply.findById(app_id)
+  if(!get_application){
+    res.status(400).json({message:"error proccessing the application"})
+  }
+  else{
+    const studentId=get_application.student_id
+    const get_student_approve=await Student.findByIdAndUpdate(studentId,
+      {Name:"Nav"},
+      {new:true}
+    )
+    res.status(200).json(get_student_approve)
+  }
+})
+
 const logged_in = async_handler(async (req, res) => {
-  res.status(200).json(req.user);
+  res.status(200).json({user:req.user,access_token:req.access_token});
 });
 
 module.exports = {
@@ -104,6 +136,8 @@ module.exports = {
   signAdmin,
   handle_application,
   view_applications,
-  
-  createAdmin
+  createAdmin,
+  verif_admin,
+  show_student,
+  verifyStudent
 };

@@ -3,6 +3,7 @@ const async_handler = require("express-async-handler");
 const Apply = require("../models/applyModel");
 const Student = require("../models/stuModel");
 
+
 const apply_placement = async_handler(async (req, res) => {
   const { CGPA, Git_url, Linkedin_url,SGPA } = req.body;
   const stu_avail = await Student.findById(req.user.id);
@@ -42,13 +43,31 @@ const affirm_student=async_handler(async(req,res)=>{
   }
 })
 
+const apporve_student=async_handler(async(req,res)=>{
+  const student=await Student.findById(req.user.id)
+  if(student){
+    const approve_stu=student.Approved
+    res.status(200).json(approve_stu)
+  }
+  else{
+    res.status(400).json({message:"student not availble"})
+  }
+})
+
 const getApplication=async_handler(async(req,res)=>{
   const findapplication=await Apply.findOne({"student_id":req.user.id})
   if(findapplication){
     const id=findapplication._id
-    id.toString()
     const {CGPA,Photo,Git_url,Linkedin_url,SGPA}=findapplication
-    res.status(200).json({CGPA,Photo,Git_url,Linkedin_url,id})
+    const response={
+      "CGPA":CGPA,
+      "Photo":Photo,
+      "Git_url":Git_url,
+      "Linkedin_url":Linkedin_url,
+      "SGPA":SGPA,
+      "_id":id
+    }
+    res.status(200).json(response)
   }
   else{
     res.status(400).json({message:"Student not found"})
@@ -56,4 +75,4 @@ const getApplication=async_handler(async(req,res)=>{
 })
 
 
-module.exports={apply_placement,affirm_student,getApplication}
+module.exports={apply_placement,affirm_student,getApplication,apporve_student}

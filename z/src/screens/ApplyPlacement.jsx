@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ApplyforPlacement.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import StudentNavbar from '../components/StudentNavbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
@@ -9,7 +9,10 @@ const ApplyForPlacement = () => {
   const [photo, setPhoto] = useState();
   const [gitUrl, setGitUrl] = useState('');
   const [linkedinUrl, setLinkedinUrl] = useState('');
+  const location=useLocation()
+  const studcred=location.state?.studcred
   const [semeseter,setSemester]=useState('')
+  const [sgpa,setSgpa]=useState('')
   const token=localStorage.getItem('accessToken')
   const navigate=useNavigate()
   const handlePhotoChange = (e) => {
@@ -27,7 +30,8 @@ const ApplyForPlacement = () => {
       'CGPA':cgpa,
       'Photo':photo,
       'Git_url':gitUrl,
-      'Linkedin_url':linkedinUrl
+      'Linkedin_url':linkedinUrl,
+      'SGPA':sgpa
     }
     await axios.post('http://localhost:5001/api/students/apply',data,{
       headers:{
@@ -37,7 +41,8 @@ const ApplyForPlacement = () => {
     }).then(response=>{
       const {message}=response.data
       if(message==='Application submitted successfully!'){
-        navigate('/StudentDash')
+        console.log(studcred)
+        navigate('/StudentDash',{state:{studcred}})
       }
     }).catch(err=>{
       console.error(err)
@@ -62,6 +67,19 @@ const ApplyForPlacement = () => {
             required
           />
         </div>
+        <br />
+        <div className={styles.formGroup}>
+          <label htmlFor="sgpa">Sgpa <strong style={{color:'red'}}>*</strong></label>
+          <input
+            type="text"
+            className={styles.formControl}
+            id="sgpa"
+            value={sgpa}
+            onChange={(e) => setSgpa(e.target.value)}
+            required
+          />
+        </div>
+        
         <div className={styles.formGroup} style={{marginTop:'20px',marginBottom:'20px'}}>
           <label htmlFor="photo">Photo(max size=10mb) <strong style={{color:'red'}}>*</strong></label>
           <br />

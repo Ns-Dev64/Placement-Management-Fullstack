@@ -11,12 +11,14 @@ const registerStu = async_handler(async (req, res) => {
     throw new Error("student already exsists");
   }
   const hashed_pass = await bcrypt.hash(Password, 10);
+  const approved="pending"
   const new_student = new Student({
     Name: Name,
     Email: Email,
     Password: hashed_pass,
     Batch:Batch,
     USN: USN,
+    Approved:approved
   });
   await new_student.save();
   return res.status(200).json({message:"student saved sucessfully"});
@@ -115,9 +117,7 @@ const deleteStu = async_handler(async (req, res) => {
     res.status(200).json({ message: "success" });
   });
 
-const stud_application=async_handler(async(req,res)=>{
-  
-})
+
 
   module.exports = {
     registerStu,

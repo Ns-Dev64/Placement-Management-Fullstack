@@ -15,6 +15,8 @@ import EditProfile from './screens/EditProfile.jsx';
 import AdminCreationSecurityNotice from './screens/AdminCreationSecurityNotice.jsx';
 import ApplyForPlacement from './screens/ApplyPlacement.jsx';
 import AdminDashboard from './screens/AdminDashboard.jsx';
+import Applications from './screens/ApplicationDashboard.jsx';
+import AddCompany from './screens/CompanyHandler.jsx';
 function App() {
   return (
     <Router>
@@ -28,6 +30,8 @@ function App() {
           <Route exact path='/AdminNotice' element={<AdminCreationSecurityNotice></AdminCreationSecurityNotice>}></Route>
           <Route exact path='/Apply' element={<ApplyForPlacement></ApplyForPlacement>}></Route>
           <Route exact path='/Admin' element={<AdminDashboard></AdminDashboard>}></Route>
+          <Route exact path='/verifyApps' element={<Applications></Applications>}></Route>
+          <Route exact path='/addCompany' element={<AddCompany></AddCompany>}></Route>
         </Routes>
       </div>
     </Router>

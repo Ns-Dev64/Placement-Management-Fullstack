@@ -22,11 +22,8 @@ const stu_schema=mongoose.Schema({
         required:true
     },
     Approved:{
-        type:"String",
-        enum: ["Yes", "No"]
-    },
-    otp: { type: "String" },
-    otpExpires: { type: "Date" }
+        type:"String"
+    }
 })
 
 module.exports=mongoose.model("Student",stu_schema)

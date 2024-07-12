@@ -1,7 +1,7 @@
 const express=require("express")
 const router=express.Router()
 const {registerStu,logged_in,signStu, updateStu, deleteStu, getStu}=require("../controllers/stuController")
-const {apply_placement,affirm_student, getApplication}=require("../controllers/placementController")
+const {apply_placement,affirm_student, getApplication, apporve_student}=require("../controllers/placementController")
 const upload=require("../middleware/uploadHandler")
 const validate_token=require("../middleware/tokenhandler")
 router.post("/registerStu",registerStu)
@@ -12,6 +12,7 @@ router.post("/delStu",validate_token,deleteStu)
 router.post("/apply",validate_token,upload,apply_placement)
 router.post("/affirm",validate_token,affirm_student)
 router.post('/getStu',validate_token,getStu)
+router.get('/approve',validate_token,apporve_student)
 router.post('/getApply',validate_token,getApplication)
 
 module.exports=router

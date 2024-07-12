@@ -9,6 +9,23 @@ export default function StudentNavbar() {
     const [expanded, setExpanded] = useState(false);
     const [application,setApplication]=useState('');
     const [availapp,setavailapp]=useState('pending')
+    const token=localStorage.getItem('accessToken')
+    const [approved,setapproved]=useState('')
+    useEffect(()=>{
+      const approve=async()=>{
+        await axios.get('http://localhost:5001/api/students/approve',{
+          headers:{
+            'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          }
+        }).then(response=>{
+          setapproved(response.data)
+        }).catch(err=>{
+          console.error(err)
+        })
+      }
+      approve()
+    },[])
     const handleLogout = () => {
         localStorage.removeItem('accessToken');
         console.log('Logged out');
@@ -22,7 +39,8 @@ export default function StudentNavbar() {
                 'Authorization': `Bearer ${token}`
             }
           }).then(response=>{
-            if(response.data.id=null){
+            console.log(response.data)
+            if(response.data._id==null){
             setavailapp('pending')
             }
             setavailapp('notpending')
@@ -32,11 +50,12 @@ export default function StudentNavbar() {
             console.error(err)
           })
     }
+    
   return (
     <>
       <Nav1 bg="dark" variant="dark" expand="lg" expanded={expanded}>
             <Container>
-                <Nav1.Brand href="#">PDIT CSE</Nav1.Brand>
+                <Nav1.Brand href="https://pdit.ac.in/index.php/programs/under-graduate/computer-science-engineering">PDIT CSE</Nav1.Brand>
                 <Nav1.Toggle 
                     aria-controls="basic-navbar-nav"
                     onClick={() => setExpanded(expanded ? false : "expanded")}
@@ -58,17 +77,53 @@ export default function StudentNavbar() {
         <h5 className="modal-title" id="exampleModalLabel">Placement Application</h5>
     
       </div>
-      <div className="modal-body container " style={{display:'flex',alignItems:'center'}}>
-      <img src={`http://localhost:5001/${application.Photo}`} style={{width:'2in',height:'2in',objectFit:'cover',border:'1px solid #000 ', marginRight:'30px'}} alt="Photo"/>
+      <div className="modal-body" style={{display:'flex',alignItems:'center'}}>
+        {application.Photo &&(
+           <img src={`http://localhost:5001/${application.Photo}`} style={{width:'1.5in',height:'1.8in',objectFit:'cover',border:'1px solid #000 ', marginRight:'30px'}} alt="Photo"/>
+        )}
       {availapp==='pending'?(
         <div>
-        <strong style={{color:'black'}}>Not yet applied?</strong>
+        <strong style={{color:'black'}}><b>Not yet applied!</b></strong>
         <br />
-        <strong style={{color:'black'}}><Link to='/EditProfile'>Apply here</Link></strong>
+        
         </div>
       ):(
-        <div style={{marginBottom:''}}>
-        <strong ><b>App_id</b>:{application.id}</strong>
+        <>
+        {approved==='Yes'?(
+          <div >
+          <strong ><b>App_id</b>:{application._id}</strong>
+          <br />
+          <strong><b>CGPA</b>:{application.CGPA}</strong>
+          <br />
+          <strong><b>SGPA</b>:{application.SGPA}</strong>
+          <br />
+          <strong><b>Github</b>:<Link to={application.Git_url}>{application.Git_url}</Link> </strong>
+          <br />
+          <strong><b>Linkedin</b>:<Link to={application.Linkedin_url}>{application.Linkedin_url}</Link></strong>
+          <br />
+          <div style={{marginTop:'30px'}}>
+            <strong style={{color:"green"}}>Application Approved</strong>
+            </div>
+        </div>
+        ):(
+          <>
+          {approved==='pending'?(
+            <div >
+            <strong ><b>App_id</b>:{application._id}</strong>
+            <br />
+            <strong><b>CGPA</b>:{application.CGPA}</strong>
+            <br />
+            <strong><b>Github</b>:<Link to={application.Git_url}>{application.Git_url}</Link> </strong>
+            <br />
+            <strong><b>Linkedin</b>:<Link to={application.Linkedin_url}>{application.Linkedin_url}</Link></strong>
+            <br />
+            <div style={{marginTop:'30px'}}>
+              <strong>.....Under Review</strong>
+              </div>
+          </div>
+          ):(
+            <div >
+        <strong ><b>App_id</b>:{application._id}</strong>
         <br />
         <strong><b>CGPA</b>:{application.CGPA}</strong>
         <br />
@@ -77,13 +132,17 @@ export default function StudentNavbar() {
         <strong><b>Linkedin</b>:<Link to={application.Linkedin_url}>{application.Linkedin_url}</Link></strong>
         <br />
         <div style={{marginTop:'30px'}}>
-          <strong>.....Under Review</strong>
+          <strong style={{color:'red'}}>Application Rejected</strong>
           </div>
       </div>
+          )}
+          </>
+        )}
+        </>
       )}
       </div>
       <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" style={{borderRadius:'10px'}}>Close</button>
       </div>
     </div>
   </div>

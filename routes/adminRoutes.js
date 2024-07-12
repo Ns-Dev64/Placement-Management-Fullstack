@@ -6,7 +6,9 @@ const {
   signAdmin,
   handle_application,
   view_applications,
-  createAdmin
+  createAdmin,
+  verif_admin,
+  show_student
 } = require("../controllers/adminController");
 const {
   add_Company,
@@ -20,12 +22,14 @@ const {
   upd_interview,
   end_interview,
 } = require("../controllers/interviewController");
+router.post("/verifyStu",validate_token,show_student)
+router.post("/getStudent",validate_token,show_student)
 router.post("/createAdmin",createAdmin)
-
 router.post("/signAdmin", signAdmin)
+router.get("/verfiyAdmin",validate_token,verif_admin)
 router.post("/logAdmin", validate_token, logged_in)
 router.post("/applications", validate_token, handle_application)
-router.post("/viewapps", validate_token, view_applications)
+router.get("/viewapps", validate_token, view_applications)
 router.post("/viewCompanies", validate_token, dislay_Companies)
 router.post("/addCompany", validate_token, add_Company)
 router.post("/updateCompany", validate_token, update_Company)

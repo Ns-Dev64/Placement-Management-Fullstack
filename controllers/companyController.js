@@ -2,18 +2,18 @@ const async_handler = require("express-async-handler");
 const Company=require("../models/companyModel")
 
 const add_Company=async_handler(async(req,res)=>{
-    const {Name,Domains,Comp_Rep,Comp_Rep_Mail,Comp_Website,Job_Titles,eligibilityCriteria,Drive_date}=req.body
-    if(!Name||!Domains||!eligibilityCriteria){
+    const {Name,Domains,Company_Representative,Company_Representative_Mail,Company_Website,Job_Titles,Eligibility_Criteria,Drive_date}=req.body
+    if(!Name||!Domains||!Eligibility_Criteria){
         res.status(400).json({message:"Please enter the required fields"})
     }
     const new_Company=new Company({
         Name:Name,
         Domains:Domains,
-        Comp_Rep:Comp_Rep,
-        Comp_Rep_Mail:Comp_Rep_Mail,
-        Comp_Website:Comp_Website,
+        Comp_Rep:Company_Representative,
+        Comp_Rep_Mail:Company_Representative_Mail,
+        Comp_Website:Company_Website,
         Job_Titles:Job_Titles,
-        eligibilityCriteria:eligibilityCriteria,
+        eligibilityCriteria:Eligibility_Criteria,
         Drive_date:Drive_date
     })
     await new_Company.save()

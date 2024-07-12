@@ -60,8 +60,17 @@ export default function Body() {
             "Username":AdminUsername,
             "Password":AdminPassword
         }).then(response=>{
-            const {Username,Email,id}=response.data
-            console.log(Username,Email,id)
+           
+            const {Email,Name,id}=response.data.user
+           
+            const {access_token}=response.data
+            const admincred={
+                Email:Email,
+                Username:Name,
+                id:id,
+                access_token:access_token
+            }
+            navigate("/Admin",{state:{admincred}})
         }).catch(err=>{
             console.error(err)
         })

@@ -11,6 +11,7 @@ export default function StudentDashboard() {
   const studcred = location.state?.studcred;
   const token=localStorage.getItem('accessToken')
   const [applicationStatus, setApplicationStatus] = useState('pending');
+  const [approved,setapproved]=useState('')
   const handleEditProfile = () => {
     navigate("/EditProfile", { state: { studcred } });
   };
@@ -33,7 +34,7 @@ export default function StudentDashboard() {
       })
   }
   const handlePlacement=()=>{
-    navigate('/Apply')
+    navigate('/Apply',{state:{studcred}})
   }
   useEffect(()=>{
     const affirm=async()=>{
@@ -53,7 +54,22 @@ export default function StudentDashboard() {
       })
     }
     affirm()
-  })
+  },[])
+  useEffect(()=>{
+    const approve=async()=>{
+      await axios.get('http://localhost:5001/api/students/approve',{
+        headers:{
+          'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+      }).then(response=>{
+        setapproved(response.data)
+      }).catch(err=>{
+        console.error(err)
+      })
+    }
+    approve()
+  },[])
   return (
     <>
       <StudentNavbar></StudentNavbar>
@@ -79,11 +95,27 @@ export default function StudentDashboard() {
       {applicationStatus === 'pending' ? (
         <button style={styles.button} onClick={handlePlacement}>Apply for Placement</button>
       ) : (
-        
-        <button className="btn btn-success" type="button" disabled>
+        <>
+        {approved==='Yes'?(
+          <div style={styles.approvedBar}>
+          Application Approved
+        </div>
+        ):(
+          <>
+          {approved==='No'?(
+            <div style={styles.rejectedBar}>
+            Application Rejected
+          </div>
+          ):(
+            <button className="btn btn-success" type="button" disabled>
   <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
   <span style={{fontFamily:'sans-serif',marginLeft:'10px'}}>Under Review</span>
 </button>
+          )}
+          </>
+        )}
+      
+        </>
       )}
     </div>
         </div>
@@ -102,6 +134,7 @@ export default function StudentDashboard() {
             style={styles.outsideButton}
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
+             data-bs-dismiss="modal"
           >
             Delete Profile
           </button>
@@ -139,6 +172,7 @@ export default function StudentDashboard() {
                   type="button"
                   className=" btn-danger"
                   style={styles.outsideButton}
+                  data-bs-dismiss="modal"
                   onClick={handleDeleteProfile}
                 >
                   Proceed
@@ -206,4 +240,20 @@ const styles = {
     backgroundColor: "#007bff",
     color: "white",
   },
+  approvedBar: {
+    padding: '15px',
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    margin: '10px 0',
+  },
+  rejectedBar: {
+    padding: '15px',
+    backgroundColor: '#f44336',
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    margin: '10px 0',
+  }
 };
