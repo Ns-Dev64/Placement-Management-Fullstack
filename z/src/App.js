@@ -17,6 +17,7 @@ import ApplyForPlacement from './screens/ApplyPlacement.jsx';
 import AdminDashboard from './screens/AdminDashboard.jsx';
 import Applications from './screens/ApplicationDashboard.jsx';
 import AddCompany from './screens/CompanyHandler.jsx';
+import SetupInterview from './screens/SetupInterview.jsx';
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
           <Route exact path='/Admin' element={<AdminDashboard></AdminDashboard>}></Route>
           <Route exact path='/verifyApps' element={<Applications></Applications>}></Route>
           <Route exact path='/addCompany' element={<AddCompany></AddCompany>}></Route>
+          <Route exact path='/setupInterview' element={<SetupInterview></SetupInterview>}></Route>
         </Routes>
       </div>
     </Router>

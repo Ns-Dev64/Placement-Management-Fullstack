@@ -1,33 +1,28 @@
 const mongoose=require("mongoose")
 
-const Comp_Domains=mongoose.Schema({
-    Domains:{
-        type:"String",
-        required:true
-    }
-})
-const Company_Jobs=mongoose.Schema({
-    Job_Titles:{
-        type:"String"
-    }
-})
+
 const company_schema=mongoose.Schema({
     Name:{
         type:"String",
         required:true
     },
-    Domains:[Comp_Domains],
+    Domains:{
+        type:"String",
+        required:true
+    },
     Comp_Rep:{
         type:"String"
     },
     Comp_Rep_Mail:{
         type:"String",
-        unique:true
     },
     Comp_Website:{
         type:"String"
     },
-    Job_Titles:[Company_Jobs],
+    Job_Titles:{
+        type:"String",
+        required:true
+    },
     eligibilityCriteria:{
         type:"String",
         required:true

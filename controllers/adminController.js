@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const Student = require("../models/stuModel");
 const AdminModel = require("../models/adminModel");
 const jwt = require("jsonwebtoken");
+const { get } = require("mongoose");
 
 const signAdmin = async_handler(async (req, res, next) => {
   const { Username, Password } = req.body;
@@ -111,6 +112,18 @@ const show_student=async_handler(async(req,res)=>{
   }
 })
 
+const setApplications=async_handler(async(req,res)=>{
+  const {student_id}=req.body
+  const getApplications=await Apply.findOne({'student_id':student_id})
+  if(!getApplications){
+    res.status(400).json({message:"error getting applications"})
+  }
+  else{
+    const {Photo}=getApplications
+    res.status(200).json(Photo)
+  }
+})
+
 const verifyStudent=async_handler(async(req,res)=>{
   const {app_id}=req.body
   const get_application=await Apply.findById(app_id)
@@ -127,6 +140,20 @@ const verifyStudent=async_handler(async(req,res)=>{
   }
 })
 
+const getApprovedStudents=async_handler(async(req,res)=>{
+  const get_Students=await Student.find({Approved:"Yes"})
+  if(get_Students){
+   get_Students.map((item=>{
+    item.Password=null
+   }))
+   res.status(200).json(get_Students)
+  }
+  else{
+    res.status(400).json({message:"No approved students"})
+  }
+
+})
+
 const logged_in = async_handler(async (req, res) => {
   res.status(200).json({user:req.user,access_token:req.access_token});
 });
@@ -139,5 +166,7 @@ module.exports = {
   createAdmin,
   verif_admin,
   show_student,
-  verifyStudent
+  verifyStudent,
+  getApprovedStudents,
+  setApplications
 };

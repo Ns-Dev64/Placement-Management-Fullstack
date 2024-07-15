@@ -30,6 +30,9 @@ const setupInterview=mongoose.Schema({
     Feedback:{
         type:"String"
     },
+    Comp_Website:{
+        type:"String"
+    },
     Result:{
         type:"String"
     },

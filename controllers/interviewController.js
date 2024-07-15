@@ -20,6 +20,7 @@ function send_interview_mail(
   Domain,
   Interviewer,
   Meeting_Link,
+  Comp_Website,
   College_Mail
 ) {
   const mailOptions = {
@@ -29,27 +30,27 @@ function send_interview_mail(
 
 Congratulations!
 
-We are pleased to inform you that you have been shortlisted for an interview with ${companyName} for the domain of ${Domain}. Below are the details of your interview:
+We are pleased to inform you that you have been shortlisted for an interview with ${companyName} (${Comp_Website}) for the domain of ${Domain}. Below are the details of your interview:
 
-**Interview Date and Time:** ${Int_date}
+Interview Date and Time: ${Int_date}
 
-**Location:** ${Int_venue}
+Location: ${Int_venue}
 
-**Interview Round:** ${Round}
+Interview Round: ${Round}
 
-**Interviewer:** ${Interviewer}
+Interviewer: ${Interviewer}
 
-**Preparation:**
+Preparation:
 - Please review the job description and company profile attached.
 - Prepare to discuss your projects, internships, and any relevant experience.
 
-**Documents to Bring:**
+Documents to Bring:
 - Updated Resume
 - Academic Transcripts
 - Government ID Proof
 - Any other relevant documents
 
-**For Virtual Interviews:**
+For Virtual Interviews:
 - Ensure a stable internet connection.
 - Join the meeting link ${Meeting_Link} at the scheduled time.
 - Test your audio and video setup beforehand.
@@ -106,6 +107,7 @@ const create_Interview = async_handler(async (req, res) => {
     const studentName = find_stu.Name;
     const studentMail = find_stu.Email;
     const companyName = find_comp.Name;
+    const Comp_Website= find_comp.Comp_Website
     if (!studentName || !companyName || !studentMail) {
       res.status(200).json({ message: "Invalid id's" });
     }
@@ -119,7 +121,8 @@ const create_Interview = async_handler(async (req, res) => {
       Domain,
       Interviewer,
       Meeting_Link,
-      "pdit@gmail.com"
+      Comp_Website,
+      "pdit@gmail.com",
     );
     res.status(200).json({ message: "email sent successfully" });
   } catch (err) {

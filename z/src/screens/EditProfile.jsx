@@ -26,7 +26,7 @@ const EditProfile = () => {
     }).then(response =>{
       const {otpId,message}=response.data
       setOtp_id(otpId)
-      if(message!='Otp sent successfully'){
+      if(message!=='Otp sent successfully'){
         alert('Error sending otp please retry')
       }
     }).catch(error=>{
@@ -42,7 +42,7 @@ const EditProfile = () => {
       "otp_id":otp_id
      }).then(response=>{
       const{message}=response.data
-      if(message=='Otp Validated'){
+      if(message==='Otp Validated'){
         alert('Otp verified succesfully')
         setOtpVerified(true)
       }
@@ -68,10 +68,9 @@ const EditProfile = () => {
     }).then(response=>{
       const {message,updatedData}=response.data
       console.log(response.data)
-      if(message=='success'){
+      if(message==='success'){
         const studcred=updatedData
         navigate('/StudentDash',{state:{studcred}})
-        
       }
     }).catch(error=>{
       console.log(error)

@@ -2,8 +2,7 @@
 
 .footer {
     background-color: #f8f9fa; /* Light background color */
-    padding: 20px 0;
-    position: fixed; /* Padding top and bottom */ /* Fixed position at bottom */
+    padding: 20px 0; /* Padding top and bottom */ /* Fixed position at bottom */
     width: 100%; /* Full width */
     bottom: 0; /* Stick to the bottom of the viewport */
     text-align: center; /* Center-align text */

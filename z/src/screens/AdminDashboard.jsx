@@ -36,8 +36,7 @@ export default function AdminDashboard() {
   };
 
   const handleSetupInterview = () => {
-    // Add logic to handle setting up an interview
-    console.log("Setup Interview button clicked");
+   navigate('/setupInterview',{state:{admincred}})
   };
   const handleGeneratePlacementReport = () => {
     // Add logic to handle generating a placement report
