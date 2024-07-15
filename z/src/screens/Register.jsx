@@ -27,7 +27,6 @@ export default function Register() {
   return (
     <>
       <Navbar></Navbar>
-      
       <div id="contentContainer" className="container">
         <div className="row">
           <div id="realContent" className="col-xs-12">

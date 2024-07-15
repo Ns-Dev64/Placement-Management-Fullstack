@@ -7,6 +7,7 @@ import {
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle"
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
 import Home from './screens/Home.jsx';
 import Register from './screens/Register.jsx';
 import OtpVerificationComponent from './screens/OtpHanlder.jsx';
@@ -18,6 +19,7 @@ import AdminDashboard from './screens/AdminDashboard.jsx';
 import Applications from './screens/ApplicationDashboard.jsx';
 import AddCompany from './screens/CompanyHandler.jsx';
 import SetupInterview from './screens/SetupInterview.jsx';
+import Test from './screens/Test.jsx';
 function App() {
   return (
     <Router>
@@ -34,6 +36,7 @@ function App() {
           <Route exact path='/verifyApps' element={<Applications></Applications>}></Route>
           <Route exact path='/addCompany' element={<AddCompany></AddCompany>}></Route>
           <Route exact path='/setupInterview' element={<SetupInterview></SetupInterview>}></Route>
+          <Route exact path='/Test' element={<Test></Test>}></Route>
         </Routes>
       </div>
     </Router>
