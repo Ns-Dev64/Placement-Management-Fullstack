@@ -74,5 +74,24 @@ const getApplication=async_handler(async(req,res)=>{
   }
 })
 
+const deleteApps=async_handler(async(req,res)=>{
+  const {app_id,approvalStatus}=req.body
+  const getapp=await Apply.findById(app_id)
+  if(getapp){
+    const student_id=getapp.student_id
+    const disapprove_student=await Student.findByIdAndUpdate(student_id,
+      {Approved:approvalStatus},
+      {new:true}
+    )
+    if(!disapprove_student){
+      res.status(400).json({message:"error processing data"})
+    }
+    await getapp.deleteOne()
+    res.status(200).json({message:"application deleted"})
+  }
+  else{
+    res.status(400).json({message:"error getting application"})
+  }
+})
 
-module.exports={apply_placement,affirm_student,getApplication,apporve_student}
+module.exports={apply_placement,affirm_student,getApplication,apporve_student,deleteApps}

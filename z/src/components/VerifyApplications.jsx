@@ -67,7 +67,23 @@ const VerifyApplications = ({ applicationsList,adminid }) => {
     })
   };
   const deleteApplication = async (id) => {
-
+    await axios.post("http://localhost:5001/api/admin/delapps",{
+      "app_id":id,
+      "approvalStatus":"No"
+    },{
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${adminid}`
+      }
+    }).then(response=>{
+      const {message}=response.data
+      if(message==='application deleted'){
+        alert("application deleted successfully")
+        window.location.reload()
+      }
+    }).catch(err=>{
+      console.error(err)
+    })
   };
 
   return (

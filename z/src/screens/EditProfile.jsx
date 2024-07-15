@@ -33,7 +33,7 @@ const EditProfile = () => {
       console.error(error)
     })
   };
-
+  
   const handleOtpSubmit = async(e) => {
     e.preventDefault();
     console.log('Submitted OTP:', otpValue);

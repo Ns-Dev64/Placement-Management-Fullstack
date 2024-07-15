@@ -145,7 +145,8 @@ const getApprovedStudents=async_handler(async(req,res)=>{
   if(get_Students){
    get_Students.map((item=>{
     item.Password=null
-   }))
+   })
+  )
    res.status(200).json(get_Students)
   }
   else{
