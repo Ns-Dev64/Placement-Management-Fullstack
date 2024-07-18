@@ -19,7 +19,9 @@ import AdminDashboard from './screens/AdminDashboard.jsx';
 import Applications from './screens/ApplicationDashboard.jsx';
 import AddCompany from './screens/CompanyHandler.jsx';
 import SetupInterview from './screens/SetupInterview.jsx';
-import Test from './screens/Test.jsx';
+
+import CompanyHandler from './screens/HandleComp.jsx';
+import InterviewHandler from './screens/InterviewHandler.jsx';
 function App() {
   return (
     <Router>
@@ -36,7 +38,9 @@ function App() {
           <Route exact path='/verifyApps' element={<Applications></Applications>}></Route>
           <Route exact path='/addCompany' element={<AddCompany></AddCompany>}></Route>
           <Route exact path='/setupInterview' element={<SetupInterview></SetupInterview>}></Route>
-          <Route exact path='/Test' element={<Test></Test>}></Route>
+     
+          <Route exact path='/handleComp' element={<CompanyHandler></CompanyHandler>}></Route>
+          <Route exact path='/handleInts' element={<InterviewHandler></InterviewHandler>}></Route>
         </Routes>
       </div>
     </Router>

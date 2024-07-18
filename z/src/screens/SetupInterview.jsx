@@ -75,7 +75,7 @@ export default function SetupInterview() {
       const {message}=response.data
       if(message==='email sent successfully'){
         alert("email sent successfully")
-        navigate('/Admin')
+        window.location.reload()
       }
      }).catch(err=>{
       console.error(err)

@@ -3,8 +3,10 @@ const Apply = require("../models/applyModel");
 const bcrypt = require("bcrypt");
 const Student = require("../models/stuModel");
 const AdminModel = require("../models/adminModel");
+const Company=require("../models/companyModel")
 const jwt = require("jsonwebtoken");
-const { get } = require("mongoose");
+const Interview = require("../models/interviewModel");
+
 
 const signAdmin = async_handler(async (req, res, next) => {
   const { Username, Password } = req.body;
@@ -124,21 +126,7 @@ const setApplications=async_handler(async(req,res)=>{
   }
 })
 
-const verifyStudent=async_handler(async(req,res)=>{
-  const {app_id}=req.body
-  const get_application=await Apply.findById(app_id)
-  if(!get_application){
-    res.status(400).json({message:"error proccessing the application"})
-  }
-  else{
-    const studentId=get_application.student_id
-    const get_student_approve=await Student.findByIdAndUpdate(studentId,
-      {Name:"Nav"},
-      {new:true}
-    )
-    res.status(200).json(get_student_approve)
-  }
-})
+
 
 const getApprovedStudents=async_handler(async(req,res)=>{
   const get_Students=await Student.find({Approved:"Yes"})
@@ -154,6 +142,44 @@ const getApprovedStudents=async_handler(async(req,res)=>{
   }
 
 })
+const getCompStudent=async_handler(async(req,res)=>{
+  const {student_id,company_id}=req.body
+  if(!student_id||!company_id)
+    res.status(400).json({message:"Error None was Found"})
+  const student=await Student.findById(student_id)
+  const company=await Company.findById(company_id)
+  if(student&&company){
+    const response={
+      "student":student,
+      "company":company
+    }
+    res.status(200).json(response)
+  }
+  else
+  res.status(400).json({message:"Error occured whilst proccessing request"})
+})
+
+const getStudent=async_handler(async(req,res)=>{
+  const {student_id}=req.body
+  const student=await Student.findById(student_id)
+  res.status(200).json(student)
+})
+
+const getCompany=async_handler(async(req,res)=>{
+  const {company_id}=req.body
+  const company=await Company.findById(company_id)
+  res.status(200).json(company)
+})
+
+
+const getIntCompStu=async_handler(async(req,res)=>{
+  const interviews=await Interview.find()
+  if(!interviews){
+    res.status(400).json({message:"error occured whilst retriveing data"})
+  }
+
+  res.status(200).json(interviews)
+})
 
 const logged_in = async_handler(async (req, res) => {
   res.status(200).json({user:req.user,access_token:req.access_token});
@@ -167,7 +193,9 @@ module.exports = {
   createAdmin,
   verif_admin,
   show_student,
-  verifyStudent,
   getApprovedStudents,
-  setApplications
+  setApplications,
+  getCompStudent,
+  getCompany,
+  getStudent
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import StudentNavbar from "../components/StudentNavbar";
 import Footer from "../components/Footer";
 import { Modal, Button } from "react-bootstrap";
-
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -276,4 +275,3 @@ const styles = {
     margin: "10px 0",
   },
 };
-

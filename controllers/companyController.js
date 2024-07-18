@@ -29,10 +29,10 @@ const dislay_Companies=async_handler((async(req,res)=>{
 }))
 
 const update_Company=async_handler(async(req,res)=>{
-    const {Company_id}=req.body
+    const {_id}=req.body
     try{
         const upd_Company= await Company.findByIdAndUpdate(
-            Company_id,
+            _id,
             req.body,
             {new:true}
         );
@@ -42,9 +42,19 @@ const update_Company=async_handler(async(req,res)=>{
     }
 })
 
+const getCompany=async_handler(async(req,res)=>{
+    const {comp_id}=req.body
+    const get_comp=await Company.findById(comp_id)
+    if (!comp_id) {
+        res.status(400);
+        throw new Error("Error occured whilst processing your request");
+      }
+    res.status(200).json(get_comp)
+})
+
 const delete_Company = async_handler(async (req, res) => {
-    const {Company_id}=req.body
-    const comp_del = await Company.findById(Company_id);
+    const {comp_id}=req.body
+    const comp_del = await Company.findById(comp_id);
     if (!comp_del) {
       res.status(400);
       throw new Error("Error occured whilst processing your request");
@@ -53,4 +63,4 @@ const delete_Company = async_handler(async (req, res) => {
     res.status(200).json({ message: "success" });
   });
 
-module.exports={add_Company,dislay_Companies,update_Company,delete_Company}
+module.exports={add_Company,dislay_Companies,update_Company,delete_Company,getCompany}

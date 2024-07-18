@@ -31,9 +31,4 @@ const company_schema=mongoose.Schema({
         type:"Date"
     }
 })
-
-
-
-
-
 module.exports=mongoose.model("Company",company_schema)

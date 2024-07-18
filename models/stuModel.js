@@ -25,5 +25,4 @@ const stu_schema=mongoose.Schema({
         type:"String"
     }
 })
-
 module.exports=mongoose.model("Student",stu_schema)

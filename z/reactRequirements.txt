@@ -1,0 +1,7 @@
+axios
+bootstrap
+bootstrap-dark-5
+react-aria
+react-bootstrap
+react-router-dom
+react-select
