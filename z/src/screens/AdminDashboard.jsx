@@ -51,7 +51,31 @@ export default function AdminDashboard() {
     }
     viewApps()
   },[])
-  
+  useEffect(()=>{
+    const processInterviews = async (interviews) => {
+      const processedInterviews = await Promise.all(interviews.map(async (interview) => {
+        const student = await fetchStudentById(interview.student_id);
+        const company = await fetchCompanyById(interview.company_id);
+        return {
+          studentName: student ? student.Name : 'Unknown',
+          studentUsn: student ? student.USN : 'null',
+          companyName: company ? company.Name : 'Unknown',
+          Int_date: new Date(interview.Int_date).toLocaleString(),
+          Domain: interview.Domain,
+          Int_venue: interview.Int_venue,
+          Round: interview.Round,
+          Feedback: interview.Feedback,
+          Remarks: interview.Remarks,
+          Result: interview.Result,
+        };
+      }));
+    
+      return processedInterviews;
+    };
+    processInterviews(interviews).then((processedInterviews) => {
+    setData(processedInterviews)
+  });
+  },[interviews])
   const handleVerifyApplications = () => {
     navigate('/verifyApps',{state:{admincred}})
   };
@@ -89,29 +113,7 @@ export default function AdminDashboard() {
     }
   };
   
-  const processInterviews = async (interviews) => {
-    const processedInterviews = await Promise.all(interviews.map(async (interview) => {
-      const student = await fetchStudentById(interview.student_id);
-      const company = await fetchCompanyById(interview.company_id);
-      return {
-        studentName: student ? student.Name : 'Unknown',
-        studentUsn: student ? student.USN : 'null',
-        companyName: company ? company.Name : 'Unknown',
-        Int_date: new Date(interview.Int_date).toLocaleString(),
-        Domain: interview.Domain,
-        Int_venue: interview.Int_venue,
-        Round: interview.Round,
-        Feedback: interview.Feedback,
-        Remarks: interview.Remarks,
-        Result: interview.Result,
-      };
-    }));
-  
-    return processedInterviews;
-  };
-  processInterviews(interviews).then((processedInterviews) => {
-  setData(processedInterviews)
-});
+ 
 
   const handleAddCompany = () => {
     navigate('/addCompany',{state:{admincred}})
@@ -136,7 +138,7 @@ export default function AdminDashboard() {
         <button className="admin-button" onClick={handleVerifyApplications}>Verify Applications</button>
         <button className="admin-button" onClick={handleAddCompany}>Add Company</button>
         <button className="admin-button" onClick={handleSetupInterview}>Setup Interview</button>
-        <CSVLink data={data} className="admin-button">Export Interviews</CSVLink>
+        <CSVLink  data={data} className="admin-button">Export Interviews</CSVLink>
       </div>
     </div>
     ):(
