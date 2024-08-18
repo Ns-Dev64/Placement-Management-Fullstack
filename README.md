@@ -51,16 +51,18 @@ npm start
 Before running the application, you need to set up environment variables to configure the following:
 
 - `PORT`: The port number where the server will run.
-- `MONGO_URI`: The connection string for MongoDB.
+- `CONNECTION_STRING`: The connection string for MongoDB.
 - `EMAIL`: The email address used for application-related communication.
-- `APP_PASSWORD`: The password for the email account.
+- `ACCESS_TOKEN` : Access token for jwt authentications.
+- `PASSWORD`: The password for the email account.
 You can create a .env file in the root directory and define these variables:
 
 ```.env
 PORT=your_port_number
-MONGO_URI=your_mongodb_connection_string
+CONNECTION_STRING=your_mongodb_connection_string
 EMAIL=your_email_address
-APP_PASSWORD=your_app_password
+ACCESS_TOKEN=your_access_token
+PASSWORD=your_app_password
 ```
 ### Usage
 To start using the application, follow these steps:
