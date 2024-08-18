@@ -133,7 +133,7 @@ export default function Body() {
                             </h3>
                             {/* Body */}
                             <div className="md-form">
-                                <i className="fa fa-envelope prefix grey-text"></i>
+                                <i className="fa fa-envelope prefix white-text"></i>
                                 <input
                                     type="text"
                                     id="defaultForm-email"
@@ -160,7 +160,7 @@ export default function Body() {
                              Cant register Admin (refer here)
                             </Link>   
                             <div className="text-center">
-                                <button className="btn btn-default waves-effect waves-light" onClick={handleAdmin}>
+                                <button className="btn btn-default waves-effect waves-light my-button" onClick={handleAdmin}>
                                     Next
                                     
                                 </button>

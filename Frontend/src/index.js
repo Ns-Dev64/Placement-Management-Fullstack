@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {disableReactDevTools} from '@fvilers/disable-react-devtools'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 if(process.env.NODE_ENV ==='production') disableReactDevTools()
 
