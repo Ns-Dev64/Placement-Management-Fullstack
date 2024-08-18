@@ -15,7 +15,7 @@ export default function AdminDashboard() {
   const [data,setData]=useState([])
   useEffect(()=>{
     const viewInts=async()=>{
-        await axios.get('http://localhost:5001/api/admin/getInts',{
+        await axios.get('https://placement-management-fullstack.onrender.com/api/admin/getInts',{
             headers:{
                   'Content-Type': 'application/json',
       'Authorization':`Bearer ${admincred.access_token}`
@@ -35,7 +35,7 @@ export default function AdminDashboard() {
 },[])
   useEffect(()=>{
     const viewApps=async()=>{
-      await axios.get("http://localhost:5001/api/admin/verfiyAdmin",{
+      await axios.get("https://placement-management-fullstack.onrender.com/api/admin/verfiyAdmin",{
         headers:{
           'Content-Type': 'application/json',
           'Authorization':`Bearer ${admincred.access_token}`
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
 
   const fetchStudentById = async (studentId) => {
     try {
-      const response = await axios.post('http://localhost:5001/api/admin/getStudents', {
+      const response = await axios.post('https://placement-management-fullstack.onrender.com/api/admin/getStudents', {
         "student_id": studentId
       }, {
         headers: {
@@ -98,7 +98,7 @@ export default function AdminDashboard() {
   };
   const fetchCompanyById = async (companyId) => {
     try {
-      const response = await axios.post('http://localhost:5001/api/admin/getCompany', {
+      const response = await axios.post('https://placement-management-fullstack.onrender.com/api/admin/getCompany', {
         "comp_id": companyId
       }, {
         headers: {

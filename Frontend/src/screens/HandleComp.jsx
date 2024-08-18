@@ -21,7 +21,7 @@ const CompanyHandler = () => {
   });
 
   const toggleExpand = async (id) => {
-    await axios.post('http://localhost:5001/api/admin/getCompany',{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/getCompany',{
         "comp_id":id
     },{
       headers: {
@@ -43,7 +43,7 @@ const CompanyHandler = () => {
 
   const handleUpdate = async (id) => {
     try {
-        await axios.post('http://localhost:5001/api/admin/updateCompany', {
+        await axios.post('https://placement-management-fullstack.onrender.com/api/admin/updateCompany', {
           ...companyDetails
         }, {
           headers: {
@@ -59,7 +59,7 @@ const CompanyHandler = () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.post("http://localhost:5001/api/admin/delCompany", {
+    await axios.post("https://placement-management-fullstack.onrender.com/api/admin/delCompany", {
         "comp_id": id
       }, {
         headers: {

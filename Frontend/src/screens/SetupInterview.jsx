@@ -29,7 +29,7 @@ export default function SetupInterview() {
   const getStuapps = async (student_id) => {
     await axios
       .post(
-        "http://localhost:5001/api/admin/getIntapps",
+        "https://placement-management-fullstack.onrender.com/api/admin/getIntapps",
         {
           student_id: student_id,
         },
@@ -55,7 +55,7 @@ export default function SetupInterview() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5001/api/admin/createInterview',
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/createInterview',
       {
         "student_id":interviewDetails.student,
         "company_id":interviewDetails.company,
@@ -83,7 +83,7 @@ export default function SetupInterview() {
   };
   useEffect(()=>{
     const getCompanies=async()=>{
-        await axios.get('http://localhost:5001/api/admin/viewCompanies',{
+        await axios.get('https://placement-management-fullstack.onrender.com/api/admin/viewCompanies',{
           headers:{
             "Content-Type": "application/json",
             'Authorization': `Bearer ${admincred.access_token}`,
@@ -99,7 +99,7 @@ export default function SetupInterview() {
   useEffect(() => {
     const viewApps = async () => {
       await axios
-        .get("http://localhost:5001/api/admin/verfiyAdmin", {
+        .get("https://placement-management-fullstack.onrender.com/api/admin/verfiyAdmin", {
           headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer ${admincred.access_token}`,
@@ -120,7 +120,7 @@ export default function SetupInterview() {
   useEffect(() => {
     const getStudents = async () => {
       await axios
-        .get("http://localhost:5001/api/admin/getApprovedStudents", {
+        .get("https://placement-management-fullstack.onrender.com/api/admin/getApprovedStudents", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${admincred.access_token}`,
@@ -154,7 +154,7 @@ const handleStudentChange = (selectedOption) => {
     label: (
       <div className="student-option">
         <img
-          src={`http://localhost:5001/${photo}`}
+          src={`https://placement-management-fullstack.onrender.com/${photo}`}
           alt={student.Name}
           className="student-photo"
         />

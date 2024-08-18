@@ -14,7 +14,7 @@ export default function Body() {
         const token=localStorage.getItem('accessToken')
         if(token){
             const logStudentin=async()=>{
-                await axios.post('http://localhost:5001/api/students/getStu',{},{
+                await axios.post('https://placement-management-fullstack.onrender.com/api/students/getStu',{},{
                     headers:{
                         'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -36,7 +36,7 @@ export default function Body() {
         }
     },[])
     const handleStudent=async()=>{
-        await axios.post('http://localhost:5001/api/students/signStu',{
+        await axios.post('https://placement-management-fullstack.onrender.com/api/students/signStu',{
             "Email":stuEmail,
             "Password":stuPassword
         }).then(response=>{
@@ -56,7 +56,7 @@ export default function Body() {
         })
     }
     const handleAdmin=async()=>{
-        await axios.post('http://localhost:5001/api/Admin/signAdmin',{
+        await axios.post('https://placement-management-fullstack.onrender.com/api/Admin/signAdmin',{
             "Username":AdminUsername,
             "Password":AdminPassword
         }).then(response=>{

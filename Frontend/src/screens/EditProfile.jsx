@@ -21,7 +21,7 @@ const EditProfile = () => {
     const cred=location.state?.studcred
     const Email=cred.Email
     console.log(Email)
-    await axios.post('http://localhost:5001/request_otp',{
+    await axios.post('https://placement-management-fullstack.onrender.com/request_otp',{
       "Email":Email
     }).then(response =>{
       const {otpId,message}=response.data
@@ -37,7 +37,7 @@ const EditProfile = () => {
   const handleOtpSubmit = async(e) => {
     e.preventDefault();
     console.log('Submitted OTP:', otpValue);
-     await axios.post('http://localhost:5001/verify_otp',{
+     await axios.post('https://placement-management-fullstack.onrender.com/verify_otp',{
       "otp":otpValue,
       "otp_id":otp_id
      }).then(response=>{
@@ -55,7 +55,7 @@ const EditProfile = () => {
     const token=localStorage.getItem('accessToken')
     console.log(token)
     console.log(email,fullName,batch,password)
-    await axios.post('http://localhost:5001/api/students/updateStu',{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/students/updateStu',{
       "Email":email,
       "Name":fullName,
       "Batch":batch,

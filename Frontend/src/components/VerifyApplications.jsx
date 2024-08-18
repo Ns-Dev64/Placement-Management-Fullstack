@@ -11,7 +11,7 @@ const VerifyApplications = ({ applicationsList,adminid }) => {
   const [Batch,setBatch]=useState('')
   const [verif,setverf]=useState('pending')
   const toggleExpand = async(id) => {
-    await axios.post('http://localhost:5001/api/admin/getStudent',{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/getStudent',{
       "app_id":id
     },{
       headers:{
@@ -34,7 +34,7 @@ const VerifyApplications = ({ applicationsList,adminid }) => {
   };
 
   const handleAccept = async(id) => {
-    await axios.post('http://localhost:5001/api/admin/applications',{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/applications',{
       "app_id":id,
       "approvalStatus":"Yes"
     },{
@@ -51,7 +51,7 @@ const VerifyApplications = ({ applicationsList,adminid }) => {
   };
 
   const handleReject = async(id) => {
-    await axios.post('http://localhost:5001/api/admin/applications',{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/applications',{
       "app_id":id,
       "approvalStatus":"No"
     },{
@@ -67,7 +67,7 @@ const VerifyApplications = ({ applicationsList,adminid }) => {
     })
   };
   const deleteApplication = async (id) => {
-    await axios.post("http://localhost:5001/api/admin/delapps",{
+    await axios.post("https://placement-management-fullstack.onrender.com/api/admin/delapps",{
       "app_id":id,
       "approvalStatus":"No"
     },{
@@ -93,7 +93,7 @@ const VerifyApplications = ({ applicationsList,adminid }) => {
         
         <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
           {application.Photo && (
-            <img src={`http://localhost:5001/${application.Photo}`} alt="Student" style={{ maxWidth: '180px', maxHeight: '180px', marginRight: '20px' }} />
+            <img src={`https://placement-management-fullstack.onrender.com/${application.Photo}`} alt="Student" style={{ maxWidth: '180px', maxHeight: '180px', marginRight: '20px' }} />
           )}
           <div>
 

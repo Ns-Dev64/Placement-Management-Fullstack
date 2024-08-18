@@ -23,7 +23,7 @@ export default function StudentDashboard() {
     console.log(token);
     await axios
       .post(
-        "http://localhost:5001/api/students/delStu",
+        "https://placement-management-fullstack.onrender.com/api/students/delStu",
         {},
         {
           headers: {
@@ -52,7 +52,7 @@ export default function StudentDashboard() {
     const affirm = async () => {
       await axios
         .post(
-          "http://localhost:5001/api/students/affirm",
+          "https://placement-management-fullstack.onrender.com/api/students/affirm",
           {},
           {
             headers: {
@@ -77,7 +77,7 @@ export default function StudentDashboard() {
   useEffect(() => {
     const approve = async () => {
       await axios
-        .get("http://localhost:5001/api/students/approve", {
+        .get("https://placement-management-fullstack.onrender.com/api/students/approve", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

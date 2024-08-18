@@ -29,7 +29,7 @@ const InterviewHandler = () => {
     const interview = interviewsList.find((int) => int._id === id);
     
     const getStudent=async()=>{
-      await axios.post('http://localhost:5001/api/admin/getCompStu',{
+      await axios.post('https://placement-management-fullstack.onrender.com/api/admin/getCompStu',{
         "student_id":interview.student_id,
         "company_id":interview.company_id
       },{
@@ -59,7 +59,7 @@ const InterviewHandler = () => {
   };
 
   const handleUpdate = async (id) => {
-    await axios.post('http://localhost:5001/api/admin/updInts', {
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/updInts', {
       interview_id: id,
       Feedback: feedback,
       Result: result,
@@ -78,7 +78,7 @@ const InterviewHandler = () => {
   };
 
   const deleteInterview = async (id) => {
-    await axios.post("http://localhost:5001/api/admin/delInts", {
+    await axios.post("https://placement-management-fullstack.onrender.com/api/admin/delInts", {
       interview_id: id
     }, {
       headers: {

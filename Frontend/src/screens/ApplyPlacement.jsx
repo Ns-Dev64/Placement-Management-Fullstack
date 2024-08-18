@@ -33,7 +33,7 @@ const ApplyForPlacement = () => {
       'Linkedin_url':linkedinUrl,
       'SGPA':sgpa
     }
-    await axios.post('http://localhost:5001/api/students/apply',data,{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/students/apply',data,{
       headers:{
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${token}` 

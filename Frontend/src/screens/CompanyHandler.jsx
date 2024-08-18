@@ -11,7 +11,7 @@ const AddCompany = () => {
     const [verification,setverification]=useState('')
     useEffect(()=>{
         const viewApps=async()=>{
-          await axios.get("http://localhost:5001/api/admin/verfiyAdmin",{
+          await axios.get("https://placement-management-fullstack.onrender.com/api/admin/verfiyAdmin",{
             headers:{
               'Content-Type': 'application/json',
               'Authorization':`Bearer ${admincred.access_token}`
@@ -46,7 +46,7 @@ const AddCompany = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5001/api/admin/addCompany',companyDetails,{
+    await axios.post('https://placement-management-fullstack.onrender.com/api/admin/addCompany',companyDetails,{
       headers:{
         'Content-Type': 'application/json',
         'Authorization':`Bearer ${admincred.access_token}`

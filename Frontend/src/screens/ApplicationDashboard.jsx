@@ -12,7 +12,7 @@ const Applications = () => {
     const [verification,setverification]=useState('')
     useEffect(()=>{
         const viewApps=async()=>{
-          await axios.get("http://localhost:5001/api/admin/verfiyAdmin",{
+          await axios.get("https://placement-management-fullstack.onrender.com/api/admin/verfiyAdmin",{
             headers:{
               'Content-Type': 'application/json',
               'Authorization':`Bearer ${admincred.access_token}`
@@ -30,7 +30,7 @@ const Applications = () => {
       },[])
     useEffect(()=>{
         const getApps=async()=>{
-            await axios.get('http://localhost:5001/api/admin/viewapps',{
+            await axios.get('https://placement-management-fullstack.onrender.com/api/admin/viewapps',{
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${admincred.access_token}`

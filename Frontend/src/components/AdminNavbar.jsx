@@ -13,7 +13,7 @@ export default function AdminNavbar(props) {
     let access_token=props.admincred
     useEffect(()=>{
         const viewInts=async()=>{
-            await axios.get('http://localhost:5001/api/admin/getInts',{
+            await axios.get('https://placement-management-fullstack.onrender.com/api/admin/getInts',{
                 headers:{
                       'Content-Type': 'application/json',
           'Authorization':`Bearer ${access_token}`
@@ -32,7 +32,7 @@ export default function AdminNavbar(props) {
     },[])
     useEffect(()=>{
         const response=async()=>{
-            await axios.get('http://localhost:5001/api/admin/viewCompanies',{
+            await axios.get('https://placement-management-fullstack.onrender.com/api/admin/viewCompanies',{
                 headers:{
                     'Content-Type': 'application/json',
           'Authorization':`Bearer ${access_token}`

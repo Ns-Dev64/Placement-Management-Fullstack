@@ -23,19 +23,19 @@ const OtpVerificationComponent = () => {
       otp_id: otpId,
     };
     await axios
-      .post("http://localhost:5001/verify_otp", verify)
+      .post("https://placement-management-fullstack.onrender.com/verify_otp", verify)
       .then((response) => {
         if ((response.data.message = "Otp Validated")) {
           const register = async () => {
             await axios
-              .post("http://localhost:5001/api/students/registerStu", cred)
+              .post("https://placement-management-fullstack.onrender.com/api/students/registerStu", cred)
               .then((response) => {
                 if ((response.data.message = "student saved sucessfully")) {
                   const getAccess = async () => {
                     console.log(cred);
                     const { Email, Password } = cred;
                     await axios
-                      .post("http://localhost:5001/api/students/signStu", {
+                      .post("https://placement-management-fullstack.onrender.com/api/students/signStu", {
                         Email: Email,
                         Password: Password,
                       })

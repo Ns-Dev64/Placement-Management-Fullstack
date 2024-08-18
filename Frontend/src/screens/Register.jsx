@@ -20,7 +20,7 @@ export default function Register() {
           "Email":cred.Email
         }
         console.log(Email)
-        const response=await axios.post('http://localhost:5001/request_otp',Email)
+        const response=await axios.post('https://placement-management-fullstack.onrender.com/request_otp',Email)
         const otpId=response.data.otpId
         navigate('/Otp',{state:{cred,otpId}});
     };

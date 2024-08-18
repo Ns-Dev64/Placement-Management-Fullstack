@@ -14,7 +14,7 @@ export default function StudentNavbar() {
   useEffect(() => {
     const approve = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/students/approve", {
+        const response = await axios.get("https://placement-management-fullstack.onrender.com/api/students/approve", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -35,7 +35,7 @@ export default function StudentNavbar() {
 
   const handleApplication = async () => {
     try {
-      const response = await axios.post("http://localhost:5001/api/students/getApply", {}, {
+      const response = await axios.post("https://placement-management-fullstack.onrender.com/api/students/getApply", {}, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ export default function StudentNavbar() {
         </Modal.Header>
         <Modal.Body style={{ display: "flex", alignItems: "center" }}>
           {application.Photo && (
-              <img src={`http://localhost:5001/${application.Photo}`} style={{width:'2in',height:'2in',objectFit:'cover',border:'1px solid #000 ', marginRight:'30px'}} alt="Photo"/>
+              <img src={`https://placement-management-fullstack.onrender.com/${application.Photo}`} style={{width:'2in',height:'2in',objectFit:'cover',border:'1px solid #000 ', marginRight:'30px'}} alt="Photo"/>
 
           )}
           {availapp === "pending" ? (
