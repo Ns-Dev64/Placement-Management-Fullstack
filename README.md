@@ -172,8 +172,8 @@ Contributions to this project are welcome! If you would like to contribute, plea
 ### Deployment
 The application is deployed on the following platforms:
 
-**Frontend (Netlify)**: Frontend Deployment
-**Backend (Render)**: Backend Deployment
+- **Frontend (Netlify)**: https://66c1b66f51ea824fe36ba273--thunderous-salamander-ada91d.netlify.app/
+- **Backend (Render)**: https://placement-management-fullstack.onrender.com
 
 ### License
 **This project is licensed under the MIT License**.
