@@ -1,4 +1,4 @@
-# Flacement Manager Documentation
+# Placement Manager Documentation
 
 ## Introduction
 
