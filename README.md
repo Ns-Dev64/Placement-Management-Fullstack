@@ -50,10 +50,10 @@ npm start
 ### Configuration
 Before running the application, you need to set up environment variables to configure the following:
 
--`PORT`: The port number where the server will run.
--`MONGO_URI`: The connection string for MongoDB.
--`EMAIL`: The email address used for application-related communication.
--`APP_PASSWORD`: The password for the email account.
+- `PORT`: The port number where the server will run.
+- `MONGO_URI`: The connection string for MongoDB.
+- `EMAIL`: The email address used for application-related communication.
+- `APP_PASSWORD`: The password for the email account.
 You can create a .env file in the root directory and define these variables:
 
 ```.env
@@ -80,43 +80,43 @@ npm start
 ### Endpoints
 #### Student Endpoints
 - POST /registerStu: Register a new student.
--POST /signStu: Sign in a student.
--POST /loginStu: Validate token and log in student.
--POST /updateStu: Validate token and update student details.
--POST /delStu: Validate token and delete student.
--POST /apply: Validate token, upload, and apply for placement.
--POST /affirm: Validate token and affirm student.
--POST /getStu: Validate token and get student details.
--GET /approve: Validate token and approve student.
--POST /getApply: Validate token and get application details.
+- POST /signStu: Sign in a student.
+- POST /loginStu: Validate token and log in student.
+- POST /updateStu: Validate token and update student details.
+- POST /delStu: Validate token and delete student.
+- POST /apply: Validate token, upload, and apply for placement.
+- POST /affirm: Validate token and affirm student.
+- POST /getStu: Validate token and get student details.
+- GET /approve: Validate token and approve student.
+- POST /getApply: Validate token and get application details.
 #### Admin Endpoints
--POST /getStudent: Validate token and show student.
--POST /createAdmin: Create a new admin.
--POST /signAdmin: Sign in as admin.
--GET /verfiyAdmin: Validate token and verify admin.
--POST /logAdmin: Validate token and log in admin.
--POST /applications: Validate token and handle applications.
--POST /delapps: Validate token and delete applications.
--GET /viewapps: Validate token and view applications.
--POST /getStudents: Validate token and get student list.
--POST /getCompany: Validate token and get company details.
--GET /viewCompanies: Validate token and display companies.
--POST /getCompStu: Validate token and get company students.
--POST /getIntapps: Validate token and set applications.
--POST /addCompany: Validate token and add a company.
--POST /updateCompany: Validate token and update company details.
--POST /delCompany: Validate token and delete a company.
--POST /createInterview: Validate token and create an interview.
--GET /getApprovedStudents: Validate token and get approved students.
--GET /getInts: Validate token and get interviews.
--POST /updInts: Validate token and update interview details.
--POST /delInts: Validate token and end interview.
+- POST /getStudent: Validate token and show student.
+- POST /createAdmin: Create a new admin.
+- POST /signAdmin: Sign in as admin.
+- GET /verfiyAdmin: Validate token and verify admin.
+- POST /logAdmin: Validate token and log in admin.
+- POST /applications: Validate token and handle applications.
+- POST /delapps: Validate token and delete applications.
+- GET /viewapps: Validate token and view applications.
+- POST /getStudents: Validate token and get student list.
+- POST /getCompany: Validate token and get company details.
+- GET /viewCompanies: Validate token and display companies.
+- POST /getCompStu: Validate token and get company students.
+- POST /getIntapps: Validate token and set applications.
+- POST /addCompany: Validate token and add a company.
+- POST /updateCompany: Validate token and update company details.
+- POST /delCompany: Validate token and delete a company.
+- POST /createInterview: Validate token and create an interview.
+- GET /getApprovedStudents: Validate token and get approved students.
+- GET /getInts: Validate token and get interviews.
+- POST /updInts: Validate token and update interview details.
+- POST /delInts: Validate token and end interview.
 #### Other Endpoints
--GET /uploads: Serve static files from the uploads directory.
--USE /api/students: Mount the student-related routes.
--USE /api/admin: Mount the admin-related routes.
--POST /request_otp: Request OTP for verification.
--POST /verify_otp: Verify OTP.
+- GET /uploads: Serve static files from the uploads directory.
+- USE /api/students: Mount the student-related routes.
+- USE /api/admin: Mount the admin-related routes.
+- POST /request_otp: Request OTP for verification.
+- POST /verify_otp: Verify OTP.
 
 ### Code Structure
 ```perl
